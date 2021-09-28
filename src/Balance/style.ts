@@ -42,7 +42,6 @@ export const Item = styled.div`
     p{
         font-size: 2rem;
         padding: 1rem;
-        font-family: Poppins;
         font-style: normal;
         font-weight: normal;
         font-size: 2rem;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from 'react-modal';
+
 import { HeaderStyle, Content} from "./style"
 import logo from "../assets/logo.svg"
 
@@ -8,9 +8,6 @@ interface ModalProps {
 }
 export function Header({openModal}: ModalProps){
    
- 
-  
-
     return(
         <HeaderStyle>
             <Content>

@@ -1,6 +1,24 @@
+import React, { useState, useEffect } from 'react'
 import { Content, Head, Row, Titulo, Preco } from "./style"
+import {api } from '../services/api'
+interface PropsItem {
+    id: number,
+    titulo: string,
+    type: 'deposit' | 'withdraw',
+    categoria:string,
+    valor:number,
+    data: string,   
+}
 
 export function Transations(){
+    const [transactions, setTransactions] = useState<PropsItem[]>([])
+
+    useEffect(()=>{
+        api.get('/transactions').then(res => setTransactions(res.data.transactions));
+        
+    },[transactions])
+
+
     return(
         <Content>
             <Head> 
@@ -9,30 +27,20 @@ export function Transations(){
                 <p>Categoria</p>
                 <p>Data</p>
             </Head>  
-            <Row>
-                <Titulo>Desenvolvimento de site</Titulo>
-                <Preco gasto={false}>R$ 12.000,00</Preco>
-                <p>Venda</p>
-                <p>13/04/2021</p>
-            </Row>
-            <Row>
-                <Titulo>Hamburguer</Titulo>
-                <Preco gasto={true}>- R$ 59,00</Preco>
-                <p>Alimentação</p>
-                <p>10/04/2021</p>
-            </Row>
-            <Row>
-                <Titulo>Aluguel do apartamento</Titulo>
-                <Preco gasto={true}>- R$ 1.200,00</Preco>
-                <p>Casa</p>
-                <p>27/03/2021</p>
-            </Row>
-            <Row>
-                <Titulo>Computador</Titulo>    
-                <Preco gasto={false}>R$ 5.400,00</Preco>
-                <p>Venda</p>
-                <p>15/03/2021</p>
-            </Row>
+            {transactions.map(item => (
+                <Row key={item.id}>
+                    <Titulo>{item.titulo}</Titulo>
+                    <Preco type={item.type}>{new Intl.NumberFormat('pt-BR',{
+                        style: 'currency',
+                        currency: 'BRL'
+                    }).format(item.valor)}</Preco>
+                    <p>{item.categoria}</p>
+                    <p>{item.data}</p>
+                </Row>
+            ))}
+           
+           
+           
         </Content>
           
        

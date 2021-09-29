@@ -43,7 +43,7 @@ export const Titulo = styled.p`
     
 `
 interface PrecoProps{
-    gasto: boolean
+    type:'deposit' | 'withdraw'
 }
 
 export const Preco = styled.p<PrecoProps>`
@@ -51,5 +51,5 @@ export const Preco = styled.p<PrecoProps>`
     font-weight: 400;
     font-size: 1.2rem;
     line-height: 1.5rem;
-    color: ${props => props.gasto ? '#E62E4D' : '#33CC95'}
+    color: ${props => props.type === 'deposit' ? '#33CC95' : '#E62E4D'}
 `

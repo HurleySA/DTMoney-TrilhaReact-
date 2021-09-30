@@ -11,7 +11,7 @@ export function Header({openModal}: ModalProps){
     return(
         <HeaderStyle>
             <Content>
-                <a href=""><img src={logo} alt="dt money" /></a>
+                <a href="http://www.google.com"><img src={logo} alt="dt money" /></a>
                 <button onClick={openModal}>Nova Transação</button>
                 
             </Content>

@@ -6,6 +6,7 @@ import { Balance } from './Balance';
 import { GlobalStyle } from './styles/global';
 import Modal from 'react-modal';
 import { TransactionModal } from './TransactionModal';
+import { TransactionsProvider } from './TransactionsContext';
 
 Modal.setAppElement("#root");
 
@@ -22,12 +23,13 @@ export function App() {
   }
   return (
     <div className="App">
-      <GlobalStyle/>
-      
-      <Header openModal={openModal}/>
-      <Balance/>
-      <TransactionModal modalIsOpen={modalIsOpen} closeModal={closeModal}/>
-      
+      <TransactionsProvider>
+        <GlobalStyle/>
+        
+        <Header openModal={openModal}/>
+        <Balance/>
+        <TransactionModal modalIsOpen={modalIsOpen} closeModal={closeModal}/>
+      </TransactionsProvider>
     </div>
   );
 }

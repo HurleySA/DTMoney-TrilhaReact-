@@ -1,24 +1,13 @@
-import React, { useState, useEffect } from 'react'
+
+import { useContext } from "react"
+import { TransactionsContext } from "../TransactionsContext";
 import { Content, Head, Row, Titulo, Preco } from "./style"
-import {api } from '../services/api'
-interface PropsItem {
-    id: number,
-    titulo: string,
-    type: 'deposit' | 'withdraw',
-    categoria:string,
-    valor:number,
-    data: string,   
-}
+
+
 
 export function Transations(){
-    const [transactions, setTransactions] = useState<PropsItem[]>([])
-
-    useEffect(()=>{
-        api.get('/transactions').then(res => setTransactions(res.data.transactions));
-        
-    },[transactions])
-
-
+    
+    const {transactions} = useContext(TransactionsContext);
     return(
         <Content>
             <Head> 

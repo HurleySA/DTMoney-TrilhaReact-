@@ -1,36 +1,35 @@
-import React, { FormEvent } from 'react'
+import React, { FormEvent, useContext } from 'react'
 import Modal from 'react-modal';
 import close from '../assets/close.svg'
 import income from "../assets/income.svg"
 import outcome from "../assets/outcome.svg"
+import { TransactionsContext } from '../TransactionsContext';
 import {ContainerModal, ContainerRadio, ItemRadio } from './style';
-import { api } from '../services/api'
-
-
 interface ModalProps {
     modalIsOpen: boolean,
     closeModal: () => void,
 }
-
-
-
 
 export function TransactionModal({modalIsOpen, closeModal}:ModalProps){
     const [titulo, setTitulo] = React.useState('');
     const [valor, setValor] = React.useState(0);
     const [categoria, setCategoria] = React.useState('');
     const [type, setType] = React.useState('deposit')
-    const handleCreateNewTransaction = (event: FormEvent) =>{
+    
+    const {createTransaction} = useContext(TransactionsContext);
+
+    const handleCreateNewTransaction =  async (event: FormEvent) =>{
         event.preventDefault();
-        const data = 
-            {
-                titulo,
-                valor,
-                categoria,
-                type,
-                data: new Date().toLocaleDateString('pt-BR'),
-            }
-        api.post('/transactions', data);
+        await createTransaction({
+            titulo,
+            type,
+            categoria,
+            valor,
+        })
+        setTitulo('');
+        setValor(0);
+        setCategoria('');
+        setType('deposit')
         closeModal();
     }
 

@@ -43,7 +43,7 @@ export const Titulo = styled.p`
     
 `
 interface PrecoProps{
-    type:'deposit' | 'withdraw'
+    type:string,
 }
 
 export const Preco = styled.p<PrecoProps>`
